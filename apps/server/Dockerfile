@@ -22,5 +22,5 @@ ENV NODE_ENV=production
 ENV PORT=3000
 EXPOSE 3000
 
-# 启动时初始化 SQLite 库再运行服务（免费容器磁盘为临时盘，重启会重建空库）
-CMD ["sh", "-c", "npx prisma db push --skip-generate --accept-data-loss && node dist/main.js"]
+# 启动时初始化 PostgreSQL（db push 建表）+ 幂等 seed（首次带演示数据），再运行服务
+CMD ["sh", "-c", "npx prisma db push --skip-generate --accept-data-loss && npm run db:seed && node dist/main.js"]

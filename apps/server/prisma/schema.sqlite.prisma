@@ -1,13 +1,12 @@
-// Prisma schema for 成长星球 (Growth Planet)
-// 线上（Render）使用 PostgreSQL，保证数据持久化（SQLite 在免费容器重启后会清空）。
-// 本地开发用 schema.sqlite.prisma（provider = "sqlite"），通过 --schema 指定。
-// 两个文件的 models 需保持同步。
+// 本地开发用 schema（provider = "sqlite"）。
+// 用法：prisma generate --schema prisma/schema.sqlite.prisma / db push --schema ...
+// 与 schema.prisma（线上 PostgreSQL）的 models 必须保持同步。
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 

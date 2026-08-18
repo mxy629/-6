@@ -1,5 +1,6 @@
 # Render 一键部署配置 —— 成长星球后端
 # 使用方式：Render 后台 New → Blueprint → 连接 GitHub 仓库 → 选用本文件
+# 数据库使用 Render 免费 PostgreSQL，数据持久化（不再因容器重启而丢失）。
 services:
   - type: web
     name: growth-planet-server
@@ -14,9 +15,17 @@ services:
         value: production
       - key: PORT
         value: 3000
+      # 由下方数据库自动注入完整的 PostgreSQL 连接串（无需手填）
       - key: DATABASE_URL
-        value: file:./dev.db
+        fromDatabase:
+          name: growth-planet-db
+          property: connectionString
       - key: JWT_SECRET
         generateValue: true
       - key: SMS_PROVIDER
         value: mock
+
+databases:
+  - name: growth-planet-db
+    databaseName: growth_planet
+    plan: free

@@ -4,11 +4,14 @@
   "private": true,
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
-    "start:dev": "ts-node -r tsconfig-paths/register src/main.ts",
+    "start:dev": "prisma generate --schema prisma/schema.sqlite.prisma && ts-node -r tsconfig-paths/register src/main.ts",
     "start:prod": "node dist/main.js",
     "db:generate": "prisma generate",
-    "db:migrate": "prisma migrate dev",
+    "db:push": "prisma db push --accept-data-loss",
     "db:seed": "ts-node -r tsconfig-paths/register prisma/seed.ts",
+    "db:generate:local": "prisma generate --schema prisma/schema.sqlite.prisma",
+    "db:push:local": "prisma db push --schema prisma/schema.sqlite.prisma --accept-data-loss",
+    "db:migrate": "prisma migrate dev",
     "db:studio": "prisma studio",
     "lint": "eslint \"src/**/*.ts\""
   },

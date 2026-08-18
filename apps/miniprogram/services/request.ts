@@ -2,7 +2,7 @@ import { store } from '../stores/app';
 
 // 后端地址：开发阶段指向本地服务；真机调试/预览时改为电脑局域网 IP；上线后改为你的域名
 // 注意：局域网 IP 会随 Wi-Fi/网络变化而改变，连不上时请 `ipconfig` 查当前 IPv4 并更新此处。
-export const BASE_URL = 'http://192.168.110.117:3000/api/v1';
+export const BASE_URL = 'https://6-er1e.onrender.com/api/v1';
 
 interface ApiResult<T> {
   success: boolean;
