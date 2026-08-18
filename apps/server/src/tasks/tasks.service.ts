@@ -158,13 +158,10 @@ export class TasksService {
   async remove(parentId: string, taskId: string) {
     await this.findOneForParent(parentId, taskId);
     await this.prisma.$transaction(async (tx) => {
-      await tx.task.update({ where: { id: taskId }, data: { status: 'CANCELLED' } });
-      await tx.taskInstance.updateMany({
-        where: { taskId, status: 'PENDING' },
-        data: { status: 'CANCELLED' },
-      });
+      // 删除按钮语义为软删除；CANCELLED 留给任务实例/审核拒绝等流程
+      await tx.task.update({ where: { id: taskId }, data: { status: 'DELETED' } });
     });
-    return { message: '任务已取消' };
+    return { message: '任务已删除' };
   }
 
   async childToday(childUserId: string) {

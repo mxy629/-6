@@ -1,3 +1,4 @@
+// 任务实例状态
 export const TaskStatusLabel: Record<string, string> = {
   PENDING: '待完成',
   SUBMITTED: '审核中',
@@ -5,6 +6,14 @@ export const TaskStatusLabel: Record<string, string> = {
   REJECTED: '需重新提交',
   EXPIRED: '已过期',
   CANCELLED: '已取消',
+};
+
+// 任务模板本身的状态（家长任务列表）
+export const TaskLabel: Record<string, string> = {
+  ACTIVE: '进行中',
+  CANCELLED: '已取消',
+  DELETED: '已删除',
+  INACTIVE: '已停用',
 };
 
 export const TaskTypeLabel: Record<string, string> = {

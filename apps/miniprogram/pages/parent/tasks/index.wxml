@@ -26,7 +26,7 @@
           <text class="t-title">{{item.title}}</text>
           <text class="t-points">+{{item.rewardPoints}} ⭐</text>
         </view>
-        <view class="t-meta">共 {{item.instanceCount}} 次 · {{item.status === 'ACTIVE' ? '进行中' : '草稿'}} · {{item.childName}}</view>
+        <view class="t-meta">共 {{item.instanceCount}} 次 · {{TaskLabel[item.status] || '草稿'}} · {{item.childName}}</view>
       </view>
       <view class="t-actions">
         <view class="t-edit" data-id="{{item.id}}" bindtap="edit">编辑</view>

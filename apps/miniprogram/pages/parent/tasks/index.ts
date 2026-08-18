@@ -1,5 +1,5 @@
 import { api } from '../../../services/request';
-import { TaskTypeLabel } from '../../../utils/format';
+import { TaskTypeLabel, TaskLabel } from '../../../utils/format';
 import { ChildDto } from '../../../types';
 
 interface TaskView {
@@ -25,6 +25,7 @@ Page({
     typeFilter: 'ALL' as string,
     typeValues: TYPE_VALUES,
     typeLabels: ['全部', ...TYPE_VALUES.slice(1).map((v) => TaskTypeLabel[v] || v)],
+    TaskLabel,
   },
 
   onShow() {
@@ -76,19 +77,6 @@ Page({
     wx.navigateTo({ url: '/pages/parent/task-form/index' });
   },
 
-  async cancel(e: any) {
-    const id = e.currentTarget.dataset.id;
-    const res = await wx.showModal({ title: '取消任务', content: '确定取消该任务？' });
-    if (!res.confirm) return;
-    try {
-      await api.del(`/tasks/${id}`);
-      wx.showToast({ title: '已取消', icon: 'success' });
-      this.load(false);
-    } catch (err: any) {
-      wx.showToast({ title: err.message, icon: 'none' });
-    }
-  },
-
   edit(e: any) {
     const id = e.currentTarget.dataset.id;
     wx.navigateTo({ url: `/pages/parent/task-form/index?id=${id}` });
@@ -101,7 +89,9 @@ Page({
     try {
       await api.del(`/tasks/${id}`);
       wx.showToast({ title: '已删除', icon: 'success' });
-      this.load(false);
+      // 立即从本地移除，避免列表刷新前仍显示
+      const tasks = this.data.tasks.filter((t) => t.id !== id);
+      this.setData({ tasks }, () => this.applyFilter());
     } catch (err: any) {
       wx.showToast({ title: err.message, icon: 'none' });
     }
