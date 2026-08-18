@@ -3,6 +3,9 @@ FROM node:20-slim
 
 WORKDIR /app
 
+# Prisma 需要完整 OpenSSL 库
+RUN apt-get update -y && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
+
 # 先装依赖（利用层缓存）
 COPY package*.json ./
 RUN npm install
