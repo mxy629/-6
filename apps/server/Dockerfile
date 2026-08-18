@@ -13,7 +13,7 @@ COPY . .
 # 数据库与构建环境
 ENV DATABASE_URL=file:./dev.db
 RUN npx prisma generate
-RUN npm run build
+RUN npx tsc -p tsconfig.docker.json
 
 # 初始化 SQLite 库（免费容器磁盘为临时盘，重启会重建空库）
 RUN npx prisma db push --skip-generate --accept-data-loss
