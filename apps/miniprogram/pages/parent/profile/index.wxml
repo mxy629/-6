@@ -1,0 +1,46 @@
+<view class="page">
+  <top-bar showBack="{{false}}" title="我的" />
+  <loading show="{{loading}}" type="skeleton" rows="2" />
+
+  <view class="profile-head">
+    <image wx:if="{{avatar}}" class="avatar-lg" src="{{avatar}}" mode="aspectFill" />
+    <view wx:else class="avatar-lg avatar-default">👨‍👩‍👦</view>
+    <view class="nick">{{nickname}}</view>
+    <view class="role-tag">家长账号</view>
+  </view>
+
+  <view class="card action-card" bindtap="switchAccount">
+    <icon name="profile" size="md" color="#34B368" />
+    <text class="action-text">切换家长账号</text>
+    <text class="action-arrow">›</text>
+  </view>
+
+  <section-header title="我的孩子" />
+  <view class="child-list-card">
+    <view class="ch-item" wx:for="{{children}}" wx:key="id">
+      <image wx:if="{{item.avatarUrl}}" class="ch-avatar" src="{{item.avatarUrl}}" mode="aspectFill" />
+      <view wx:else class="ch-avatar ch-default">{{item.nickname[0]}}</view>
+      <view class="ch-body">
+        <view class="ch-name">{{item.nickname}}</view>
+        <view class="ch-meta">积分 {{item.pointsBalance}} · 账号 {{item.loginName}}</view>
+      </view>
+      <view class="ch-actions">
+        <view class="ch-edit" data-id="{{item.id}}" bindtap="editChild">编辑</view>
+        <view class="ch-del" data-id="{{item.id}}" bindtap="deleteChild">删除</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card form-card" wx:if="{{showForm}}">
+    <view class="section-label">创建孩子账号</view>
+    <input class="input" placeholder="孩子昵称" value="{{form.nickname}}" bindinput="onNick" />
+    <input class="input" placeholder="登录账号" value="{{form.loginName}}" bindinput="onLogin" />
+    <input class="input" type="number" placeholder="PIN (4-6位数字)" value="{{form.pin}}" bindinput="onPin" />
+    <button class="btn btn-primary btn-block" loading="{{submitting}}" bindtap="create">创建</button>
+  </view>
+
+  <button class="btn btn-secondary btn-block" bindtap="toggleForm">{{showForm ? '收起' : '+ 创建孩子账号'}}</button>
+  <button class="btn btn-danger-ghost btn-block" bindtap="logout">退出登录</button>
+
+  <nav-bar role="PARENT" active="profile" />
+</view>

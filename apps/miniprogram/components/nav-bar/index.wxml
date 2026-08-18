@@ -1,0 +1,20 @@
+<view class="nav-bar">
+  <view
+    wx:for="{{tabs}}"
+    wx:key="key"
+    class="nav-item {{active === item.key ? 'active' : ''}}"
+    data-key="{{item.key}}"
+    data-page="{{item.page}}"
+    bindtap="onTap"
+  >
+    <view class="nav-icon-wrap">
+      <icon name="{{item.icon}}" size="md" />
+    </view>
+    <text class="nav-label">{{item.label}}</text>
+    <view
+      wx:if="{{role === 'PARENT' && ((item.key === 'reviews' && badges.reviews > 0) || (item.key === 'rewards' && badges.rewards > 0))}}"
+      class="nav-badge"
+    >{{item.key === 'reviews' ? badges.reviews : badges.rewards}}</view>
+  </view>
+  <view class="nav-safe-area"></view>
+</view>

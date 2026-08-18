@@ -1,0 +1,148 @@
+.form-section {
+  padding-bottom: 160rpx;
+}
+
+.section-label {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 8rpx 0 16rpx 8rpx;
+}
+
+.form-card {
+  padding: 8rpx 24rpx;
+  margin-bottom: 24rpx;
+}
+
+.form-cell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid var(--color-divider);
+}
+
+.form-cell:last-child {
+  border-bottom: none;
+}
+
+.form-cell.column {
+  flex-direction: column;
+}
+
+.form-cell-label {
+  font-size: 28rpx;
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
+  margin-right: 24rpx;
+}
+
+.form-cell.column .form-cell-label {
+  margin-bottom: 16rpx;
+  margin-right: 0;
+}
+
+.picker-value {
+  font-size: 28rpx;
+  color: var(--color-text-primary);
+  text-align: right;
+}
+
+.input.flat,
+.textarea.flat {
+  background: var(--color-bg);
+  border-radius: 16rpx;
+  width: 100%;
+}
+
+.textarea.flat {
+  min-height: 140rpx;
+}
+
+/* 积分步进 */
+.points-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24rpx 0;
+}
+
+.points-stepper {
+  display: flex;
+  align-items: center;
+  background: var(--color-bg);
+  border-radius: 16rpx;
+  padding: 8rpx;
+}
+
+.step-btn {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 12rpx;
+  background: var(--color-surface);
+  color: var(--color-primary);
+  font-size: 36rpx;
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.06);
+}
+
+.step-btn:active {
+  opacity: 0.8;
+}
+
+.points-input {
+  width: 120rpx;
+  text-align: center;
+  font-size: 40rpx;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  background: transparent;
+}
+
+.points-unit {
+  margin-left: 16rpx;
+  font-size: 28rpx;
+  color: var(--color-text-secondary);
+}
+
+.quick-points {
+  display: flex;
+  justify-content: center;
+  gap: 16rpx;
+  padding-bottom: 24rpx;
+}
+
+.qp-chip {
+  padding: 10rpx 28rpx;
+  border-radius: 999rpx;
+  font-size: 26rpx;
+  color: var(--color-text-secondary);
+  background: var(--color-bg);
+  border: 1rpx solid var(--color-border);
+}
+
+.qp-chip.on {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* 底部固定按钮 */
+.form-footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--color-surface);
+  padding: 20rpx 24rpx calc(20rpx + env(safe-area-inset-bottom));
+  box-shadow: 0 -2rpx 16rpx rgba(0, 0, 0, 0.05);
+  z-index: 50;
+}
+
+.footer-spacer {
+  height: 140rpx;
+}

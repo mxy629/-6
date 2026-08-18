@@ -1,0 +1,15 @@
+<view class="points-card {{variant}}">
+  <view class="pc-header">
+    <text class="pc-title">{{title}}</text>
+    <icon wx:if="{{variant === 'primary'}}" name="star" size="md" color="#FFFFFF" />
+  </view>
+  <view class="pc-body">
+    <text class="pc-balance">{{balance}}</text>
+    <text class="pc-unit">积分</text>
+  </view>
+  <view wx:if="{{subtitle}}" class="pc-subtitle">{{subtitle}}</view>
+  <view class="pc-stars">
+    <text class="pc-star">✨</text>
+    <text class="pc-star">⭐</text>
+  </view>
+</view>

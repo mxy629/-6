@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "发布任务",
+  "usingComponents": {
+    "loading": "../../../components/loading/index",
+    "top-bar": "../../../components/top-bar/index"
+  }
+}

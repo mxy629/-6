@@ -1,0 +1,23 @@
+<view class="page">
+  <loading show="{{loading}}" />
+  <view class="profile-head">
+    <view class="avatar">👦</view>
+    <view class="nick">{{nickname}}</view>
+    <view class="muted">当前积分 {{balance}}</view>
+  </view>
+
+  <view class="stats card">
+    <view class="stat">
+      <view class="stat-num">{{completed}}</view>
+      <view class="muted">累计完成</view>
+    </view>
+    <view class="stat">
+      <view class="stat-num">{{totalEarned}}</view>
+      <view class="muted">累计获得</view>
+    </view>
+  </view>
+
+  <button class="btn-logout" bindtap="logout">退出登录</button>
+
+  <nav-bar role="CHILD" active="profile" />
+</view>

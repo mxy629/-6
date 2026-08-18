@@ -1,0 +1,13 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "家长首页",
+  "usingComponents": {
+    "nav-bar": "../../../components/nav-bar/index",
+    "loading": "../../../components/loading/index",
+    "top-bar": "../../../components/top-bar/index",
+    "icon": "../../../components/icon/index",
+    "section-header": "../../../components/section-header/index",
+    "task-card": "../../../components/task-card/index",
+    "empty-state": "../../../components/empty-state/index"
+  }
+}

@@ -1,0 +1,29 @@
+.section-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  margin: 24rpx 0 12rpx;
+}
+
+.ledger-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx 28rpx;
+}
+
+.li-desc {
+  font-size: 28rpx;
+}
+
+.li-amount {
+  font-size: 32rpx;
+  font-weight: 700;
+}
+
+.li-amount.plus {
+  color: var(--color-primary);
+}
+
+.li-amount.minus {
+  color: var(--color-danger);
+}

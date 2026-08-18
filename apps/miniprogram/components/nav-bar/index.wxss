@@ -1,0 +1,79 @@
+.nav-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--color-surface);
+  display: flex;
+  box-shadow: 0 -2rpx 16rpx rgba(0, 0, 0, 0.05);
+  padding-top: 12rpx;
+  z-index: 100;
+}
+
+.nav-safe-area {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: env(safe-area-inset-bottom);
+  background: var(--color-surface);
+  pointer-events: none;
+}
+
+.nav-item {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-bottom: calc(12rpx + env(safe-area-inset-bottom));
+  height: calc(100rpx + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+}
+
+.nav-icon-wrap {
+  width: 56rpx;
+  height: 56rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999rpx;
+  margin-bottom: 4rpx;
+  transition: all 0.2s ease;
+}
+
+.nav-item.active .nav-icon-wrap {
+  background: var(--color-primary-light);
+}
+
+.nav-label {
+  font-size: 22rpx;
+  color: var(--color-text-tertiary);
+  line-height: 1.2;
+  transition: all 0.2s ease;
+}
+
+.nav-item.active .nav-label {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.nav-badge {
+  position: absolute;
+  top: 6rpx;
+  right: 26rpx;
+  min-width: 28rpx;
+  height: 28rpx;
+  padding: 0 8rpx;
+  box-sizing: border-box;
+  background: var(--color-danger);
+  color: var(--color-surface);
+  font-size: 20rpx;
+  font-weight: 600;
+  border-radius: 999rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}

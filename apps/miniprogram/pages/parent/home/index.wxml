@@ -1,0 +1,152 @@
+<view class="page">
+  <top-bar showBack="{{false}}" title="成长星球" />
+
+  <loading show="{{loading && !dash}}" type="skeleton" rows="3" />
+
+  <block wx:if="{{dash && dash.child}}">
+    <!-- 欢迎 + 孩子切换 -->
+    <view class="welcome-row">
+      <view>
+        <view class="greeting">{{greeting}}</view>
+        <view class="child-greeting">{{dash.child.nickname}}的今日成长</view>
+      </view>
+      <picker wx:if="{{children.length > 1}}" mode="selector" range="{{children}}" range-key="nickname" value="{{childIndex}}" bindchange="onSwitchChild">
+        <view class="child-switcher">
+          <image wx:if="{{dash.child.avatarUrl}}" class="cs-avatar" src="{{dash.child.avatarUrl}}" mode="aspectFill" />
+          <view wx:else class="cs-avatar cs-default">👦</view>
+          <text class="cs-name">{{dash.child.nickname}}</text>
+          <text class="cs-arrow">›</text>
+        </view>
+      </picker>
+      <view wx:else class="child-switcher">
+        <image wx:if="{{dash.child.avatarUrl}}" class="cs-avatar" src="{{dash.child.avatarUrl}}" mode="aspectFill" />
+        <view wx:else class="cs-avatar cs-default">👦</view>
+        <text class="cs-name">{{dash.child.nickname}}</text>
+      </view>
+    </view>
+
+    <!-- 成长数据卡 -->
+    <view class="growth-card">
+      <view class="growth-head">
+        <view class="gh-title">今日成长概览</view>
+        <view wx:if="{{dash.child.streak > 0}}" class="streak-badge">
+          <icon name="fire" size="sm" color="#FF6B6B" />
+          <text>连续完成 {{dash.child.streak}} 天</text>
+        </view>
+      </view>
+      <view class="growth-stats">
+        <view class="g-stat">
+          <text class="g-num">{{dash.todayCompleted}}</text>
+          <text class="g-num">/{{todayTotal}}</text>
+          <view class="g-label">今日完成</view>
+        </view>
+        <view class="g-stat">
+          <text class="g-num text-points">+{{dash.todayEarned}}</text>
+          <view class="g-label">今日积分</view>
+        </view>
+        <view class="g-stat g-progress">
+          <view class="progress-circle-wrap" style="--percent: {{todayTotal > 0 ? Math.round(dash.todayCompleted / todayTotal * 100) : 0}};">
+            <view class="progress-num">{{todayTotal > 0 ? Math.round(dash.todayCompleted / todayTotal * 100) : 0}}%</view>
+          </view>
+          <view class="g-label">完成进度</view>
+        </view>
+      </view>
+      <view wx:if="{{progressLabel}}" class="growth-tip">{{progressLabel}}</view>
+    </view>
+
+    <!-- 快捷操作 -->
+    <view class="quick-actions">
+      <view class="qa-card qa-primary" bindtap="goTaskForm">
+        <icon name="task" size="lg" color="#FFFFFF" />
+        <text class="qa-label">发布任务</text>
+      </view>
+      <view class="qa-card qa-reward" bindtap="goRewardForm">
+        <icon name="reward" size="lg" color="#FFFFFF" />
+        <text class="qa-label">添加奖励</text>
+      </view>
+    </view>
+
+    <!-- 分享 -->
+    <button class="share-btn" open-type="share">🔗 分享给家人</button>
+
+    <!-- 待我处理 -->
+    <section-header title="待我处理" extra="{{pendingAll > 0 ? pendingAll + ' >' : '查看全部 >'}}" showArrow bind:tap="goReviews" />
+    <view wx:if="{{dash.pendingReviewItems.length > 0 || dash.pendingRedemptionItems.length > 0}}">
+      <view class="pending-card review-card" wx:for="{{dash.pendingReviewItems}}" wx:key="id" bindtap="goReviews">
+        <view class="pending-icon review-icon">
+          <icon name="task" size="md" color="#FFFFFF" />
+        </view>
+        <view class="pending-body">
+          <view class="pending-title">{{item.task.title}}</view>
+          <view class="pending-sub">{{item.child.nickname}} · {{item.submittedAt ? item.submittedAt : '刚刚提交'}}</view>
+        </view>
+        <view class="pending-right">
+          <view class="pending-points">+{{item.task.rewardPoints}} ⭐</view>
+          <view class="pending-tag review-tag">待审核</view>
+        </view>
+      </view>
+      <view class="pending-card redeem-card" wx:for="{{dash.pendingRedemptionItems}}" wx:key="id" bindtap="goRedemptions">
+        <view class="pending-icon redeem-icon">
+          <icon name="gift" size="md" color="#FFFFFF" />
+        </view>
+        <view class="pending-body">
+          <view class="pending-title">{{item.reward.name}}</view>
+          <view class="pending-sub">{{item.child.nickname}} · {{item.createdAt}} 申请</view>
+        </view>
+        <view class="pending-right">
+          <view class="pending-points redeem-cost">{{item.pointsCost}} ⭐</view>
+          <view class="pending-tag redeem-tag">待确认</view>
+        </view>
+      </view>
+    </view>
+    <view wx:else class="empty-tip">暂无待处理事项，去检查孩子今天的任务吧</view>
+
+    <!-- 今日任务 -->
+    <section-header title="今日任务" extra="{{dash.todayCompleted}}/{{todayTotal}} >" showArrow bind:tap="goTasks" />
+    <task-card
+      wx:for="{{dash.todayTasks}}"
+      wx:key="id"
+      title="{{item.task.title}}"
+      points="{{item.task.rewardPoints}}"
+      status="{{item.status}}"
+      statusText="{{item.statusText}}"
+      instanceId="{{item.id}}"
+      taskType="{{item.task.taskType}}"
+      compact="{{true}}"
+      canAction="{{false}}"
+      bind:tap="onTaskTap"
+    />
+    <empty-state wx:if="{{!loading && dash.todayTasks.length === 0}}" text="今天还没有任务，给孩子安排一个小目标吧" emoji="🌱" showAction actionText="发布任务" bind:action="goTaskForm" />
+
+    <!-- 最近动态 -->
+    <section-header title="最近动态" extra="查看全部 >" showArrow bind:tap="goTasks" />
+    <view wx:if="{{dash.activitiesView.length > 0}}" class="timeline-card">
+      <view class="tl-item" wx:for="{{dash.activitiesView}}" wx:key="at">
+        <view class="tl-dot {{item.status}}"></view>
+        <view class="tl-body">
+          <view class="tl-text">{{item.text}}</view>
+          <view class="tl-time">{{item.at}}</view>
+        </view>
+      </view>
+    </view>
+    <empty-state wx:if="{{!loading && dash.activitiesView.length === 0}}" text="还没有动态记录" emoji="🌱" />
+
+    <!-- 积分流水入口 -->
+    <view class="ledger-entry" bindtap="goLedger">
+      <icon name="points" size="md" color="#34B368" />
+      <text class="le-text">查看 {{dash.child.nickname}} 的积分流水</text>
+      <text class="le-arrow">›</text>
+    </view>
+  </block>
+
+  <block wx:elif="{{!loading && dash && !dash.child}}">
+    <view class="empty-state-custom">
+      <view class="empty-emoji">🌱</view>
+      <view class="empty-title">还没有孩子账号</view>
+      <view class="empty-desc">创建孩子账号后，就可以开始发布任务和奖励啦</view>
+      <view class="empty-action" bindtap="goRewardForm">去我的页面创建</view>
+    </view>
+  </block>
+
+  <nav-bar id="navbar" role="PARENT" active="home" />
+</view>

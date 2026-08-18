@@ -1,0 +1,72 @@
+.points-card {
+  position: relative;
+  border-radius: 32rpx;
+  padding: 36rpx;
+  color: var(--color-surface);
+  margin-bottom: 24rpx;
+  overflow: hidden;
+}
+
+.points-card.primary {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  box-shadow: 0 8rpx 24rpx rgba(52, 179, 104, 0.22);
+}
+
+.points-card.warning {
+  background: linear-gradient(135deg, var(--color-points) 0%, var(--color-warning) 100%);
+  box-shadow: 0 8rpx 24rpx rgba(255, 197, 66, 0.22);
+}
+
+.pc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+}
+
+.pc-title {
+  font-size: 28rpx;
+  opacity: 0.95;
+}
+
+.pc-body {
+  display: flex;
+  align-items: baseline;
+  margin-top: 16rpx;
+  position: relative;
+  z-index: 2;
+}
+
+.pc-balance {
+  font-size: 72rpx;
+  font-weight: 700;
+  line-height: 1;
+  margin-right: 12rpx;
+}
+
+.pc-unit {
+  font-size: 28rpx;
+  opacity: 0.9;
+}
+
+.pc-subtitle {
+  font-size: 24rpx;
+  opacity: 0.9;
+  margin-top: 16rpx;
+  position: relative;
+  z-index: 2;
+}
+
+.pc-stars {
+  position: absolute;
+  right: 24rpx;
+  bottom: 20rpx;
+  z-index: 1;
+  opacity: 0.35;
+}
+
+.pc-star {
+  font-size: 80rpx;
+  margin-left: 12rpx;
+}

@@ -1,0 +1,38 @@
+@import './styles/theme.wxss';
+
+/* 全局页面基础 */
+page {
+  background: var(--color-bg);
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  color: var(--color-text-primary);
+  font-size: var(--font-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  /* 显式建立页面滚动容器，避免自定义导航 / 满屏布局下整页无法滑动 */
+  height: 100vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 统一按钮点击态 */
+.btn-primary:active {
+  opacity: 0.92;
+  transform: scale(0.98);
+}
+
+.btn-secondary:active,
+.btn-ghost:active,
+.btn-danger-ghost:active {
+  background: var(--color-divider);
+}
+
+/* 通用卡片点击态 */
+.card-tap:active {
+  opacity: 0.9;
+  transform: scale(0.99);
+}
+
+/* 安全区底部 */
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}

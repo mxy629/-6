@@ -1,0 +1,58 @@
+<view class="login">
+  <view class="logo">🌱</view>
+  <view class="app-name">成长星球</view>
+  <view class="slogan">任务打卡 · 积分激励 · 亲子共成长</view>
+
+  <view class="tabs">
+    <view class="tab {{mode === 'parent' ? 'active' : ''}}" data-mode="parent" bindtap="switchMode">家长登录</view>
+    <view class="tab {{mode === 'child' ? 'active' : ''}}" data-mode="child" bindtap="switchMode">孩子登录</view>
+  </view>
+
+  <view class="card" wx:if="{{mode === 'parent'}}">
+    <view class="seg">
+      <view class="seg-item {{parentSub === 'wechat' ? 'active' : ''}}" data-sub="wechat" bindtap="switchParentSub">微信</view>
+      <view class="seg-item {{parentSub === 'phone' ? 'active' : ''}}" data-sub="phone" bindtap="switchParentSub">手机号</view>
+    </view>
+
+    <block wx:if="{{parentSub === 'wechat'}}">
+      <button class="btn-primary" loading="{{loading}}" bindtap="onParentLogin">微信一键登录</button>
+      <view class="muted tip">家长使用微信登录后可发布任务、审核完成、管理奖励。</view>
+    </block>
+
+    <block wx:else>
+      <view class="seg sm">
+        <view class="seg-item {{phoneMode === 'login' ? 'active' : ''}}" data-m="login" bindtap="switchPhoneMode">登录</view>
+        <view class="seg-item {{phoneMode === 'register' ? 'active' : ''}}" data-m="register" bindtap="switchPhoneMode">注册</view>
+      </view>
+      <input class="input" placeholder="手机号（11 位）" type="number" maxlength="11" value="{{phone}}" bindinput="onPhone" />
+      <view class="code-row">
+        <input class="input code-input" placeholder="6 位验证码" type="number" maxlength="6" value="{{code}}" bindinput="onCode" />
+        <button class="btn-code {{countdown > 0 ? 'disabled' : ''}}" disabled="{{countdown > 0}}" bindtap="onSendCode">{{countdown > 0 ? countdown + 's' : '获取验证码'}}</button>
+      </view>
+      <input wx:if="{{phoneMode === 'register'}}" class="input" placeholder="昵称（选填）" value="{{nickname}}" bindinput="onNickname" />
+      <button class="btn-primary" loading="{{loading}}" bindtap="onPhoneSubmit">{{phoneMode === 'register' ? '注册并登录' : '登录'}}</button>
+      <view class="muted tip">开发环境验证码会直接弹窗提示；上线前将接入真实短信通道。</view>
+    </block>
+
+    <view class="muted tip account-hint">微信登录与手机号登录分别对应不同的家长账号，任务与奖励按家长账号相互独立隔离。</view>
+  </view>
+
+  <view class="card" wx:else>
+    <input class="input" placeholder="孩子账号 / 昵称" value="{{loginName}}" bindinput="onLoginName" />
+    <input class="input" placeholder="PIN (4-6 位数字)" type="number" password value="{{pin}}" bindinput="onPin" />
+    <button class="btn-primary" loading="{{loading}}" bindtap="onChildLogin">登录</button>
+    <view class="muted tip">账号由家长创建，测试账号：xiaoyu / PIN: 2580</view>
+  </view>
+
+  <!-- 微信资料授权弹窗 -->
+  <view class="modal-mask" wx:if="{{showConsent}}">
+    <view class="modal">
+      <view class="modal-title">授权使用微信资料</view>
+      <view class="modal-body">成长星球需要获取你的微信头像和昵称，用于在家长端展示你的身份（如左上角的头像与姓名）。我们仅用于身份展示，不会用于其他用途。是否同意授权？</view>
+      <view class="modal-actions">
+        <button class="btn-ghost" bindtap="onConsentDecline">暂不授权</button>
+        <button class="btn-primary" bindtap="onConsentAgree">同意并登录</button>
+      </view>
+    </view>
+  </view>
+</view>

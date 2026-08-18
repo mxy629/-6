@@ -1,0 +1,1 @@
+<text class="gp-icon {{sizeClass}}" style="{{color ? 'color:' + color + ';' : ''}}">{{icon}}</text>

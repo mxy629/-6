@@ -1,0 +1,63 @@
+<view class="page">
+  <top-bar showBack="{{true}}" title="奖励管理" />
+  <loading show="{{loading}}" type="skeleton" rows="2" />
+
+  <view class="filters" wx:if="{{!showForm}}">
+    <view class="search-wrap">
+      <icon name="review" size="sm" color="#999999" />
+      <input class="search-input" placeholder="搜索奖励名称" value="{{keyword}}" bindinput="onSearch" />
+    </view>
+    <scroll-view class="status-scroll" scroll-x="true">
+      <view
+        wx:for="{{statusLabels}}"
+        wx:key="index"
+        class="chip {{statusFilter === statusValues[index] ? 'chip-active' : ''}}"
+        data-index="{{index}}"
+        bindtap="onStatusFilter"
+      >{{item}}</view>
+    </scroll-view>
+  </view>
+
+  <view class="card form-card" wx:if="{{showForm}}">
+    <view class="section-label">{{editingId ? '编辑奖励' : '新建奖励'}}</view>
+    <view class="form-body">
+      <input class="input" placeholder="奖励名称" value="{{form.name}}" bindinput="onName" />
+      <input class="input" placeholder="说明（选填）" value="{{form.description}}" bindinput="onDesc" />
+      <view class="inline-row">
+        <input class="input" type="number" placeholder="需要积分" value="{{form.pointsCost}}" bindinput="onCost" />
+        <input class="input" type="number" placeholder="库存" value="{{form.stock}}" bindinput="onStock" />
+      </view>
+    </view>
+    <view class="form-actions">
+      <button class="btn btn-primary btn-block" loading="{{submitting}}" bindtap="submit">{{editingId ? '保存修改' : '保存为草稿'}}</button>
+      <button class="btn btn-ghost btn-block" wx:if="{{editingId}}" bindtap="resetForm">取消编辑</button>
+      <button class="btn btn-danger-ghost btn-block" wx:if="{{editingId}}" bindtap="onDelete">删除奖励</button>
+    </view>
+  </view>
+
+  <view class="reward-list">
+    <view class="rw-item" wx:for="{{displayRewards}}" wx:key="id">
+      <view class="rw-icon">🎁</view>
+      <view class="rw-body">
+        <view class="rw-title-row">
+          <text class="rw-name">{{item.name}}</text>
+          <status-badge status="{{item.status === 'ACTIVE' ? 'APPROVED' : 'PENDING'}}" text="{{item.statusText}}" size="sm" />
+        </view>
+        <view class="rw-meta">{{item.pointsCost}} 积分 · 库存 {{item.stock}}</view>
+      </view>
+      <view class="rw-actions">
+        <view class="rw-edit" data-id="{{item.id}}" bindtap="edit">编辑</view>
+        <view wx:if="{{item.status === 'ACTIVE'}}" class="rw-del" data-id="{{item.id}}" bindtap="remove">下架</view>
+        <view wx:else class="rw-pub" data-id="{{item.id}}" bindtap="publish">上架</view>
+      </view>
+    </view>
+  </view>
+
+  <empty-state wx:if="{{!loading && displayRewards.length === 0}}" text="没有匹配的奖励" emoji="🎁" />
+
+  <view class="fab fab-reward" bindtap="toggleForm">
+    <icon name="add" size="lg" color="#FFFFFF" />
+  </view>
+
+  <nav-bar role="PARENT" active="rewards" />
+</view>

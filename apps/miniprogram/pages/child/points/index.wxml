@@ -1,0 +1,16 @@
+<view class="page">
+  <loading show="{{loading}}" />
+  <points-card balance="{{balance}}" />
+
+  <view class="section-title">积分流水</view>
+  <view class="card ledger-item" wx:for="{{ledger}}" wx:key="id">
+    <view class="li-left">
+      <view class="li-desc">{{item.description || item.type}}</view>
+      <view class="muted">{{item.timeText}}</view>
+    </view>
+    <view class="li-amount {{item.amount > 0 ? 'plus' : 'minus'}}">{{item.amountText}}</view>
+  </view>
+  <empty-state wx:if="{{!loading && ledger.length === 0}}" text="还没有积分记录" />
+
+  <nav-bar role="CHILD" active="points" />
+</view>

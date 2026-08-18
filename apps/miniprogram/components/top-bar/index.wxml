@@ -1,0 +1,12 @@
+<view class="topbar {{light ? 'topbar-light' : 'topbar-green'}}" style="padding-top: {{statusBarHeight}}px;">
+  <view class="tb-inner">
+    <view class="tb-left">
+      <view wx:if="{{showBack}}" class="tb-back" bindtap="onBack">‹</view>
+      <block wx:else>
+        <image wx:if="{{user.avatarUrl}}" class="tb-avatar" src="{{user.avatarUrl}}" mode="aspectFill" />
+        <view wx:else class="tb-avatar tb-default">{{defaultAvatar}}</view>
+      </block>
+      <text class="tb-name">{{title || user.nickname}}</text>
+    </view>
+  </view>
+</view>

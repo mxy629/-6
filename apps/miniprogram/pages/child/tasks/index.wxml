@@ -1,0 +1,31 @@
+<view class="page">
+  <loading show="{{loading}}" />
+
+  <view class="filters">
+    <view
+      wx:for="{{filters}}"
+      wx:key="key"
+      class="filter {{filter === item.key ? 'active' : ''}}"
+      data-key="{{item.key}}"
+      bindtap="setFilter"
+    >{{item.label}}</view>
+  </view>
+
+  <task-card
+    wx:for="{{tasks}}"
+    wx:key="id"
+    wx:if="{{filter === 'ALL' || filter === item.status}}"
+    title="{{item.task.title}}"
+    points="{{item.task.rewardPoints}}"
+    status="{{item.status}}"
+    statusText="{{item.statusText}}"
+    instanceId="{{item.id}}"
+    canAction="{{item.status === 'PENDING'}}"
+    bind:tap="onTaskTap"
+    bind:action="onTaskAction"
+  />
+
+  <empty-state wx:if="{{!loading && tasks.length === 0}}" text="还没有任务哦" />
+
+  <nav-bar role="CHILD" active="tasks" />
+</view>

@@ -1,0 +1,38 @@
+.section-header-root {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16rpx;
+  margin-top: 8rpx;
+}
+
+.section-title-line {
+  display: flex;
+  align-items: center;
+}
+
+.section-line {
+  width: 8rpx;
+  height: 28rpx;
+  background: var(--color-primary);
+  border-radius: 4rpx;
+  margin-right: 12rpx;
+}
+
+.section-title-text {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.section-extra {
+  font-size: 24rpx;
+  color: var(--color-text-tertiary);
+  display: flex;
+  align-items: center;
+}
+
+.section-arrow {
+  margin-left: 4rpx;
+  font-size: 28rpx;
+}

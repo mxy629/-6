@@ -1,0 +1,83 @@
+<view class="page child-page">
+  <loading show="{{loading && !dashboard}}" type="skeleton" rows="3" />
+
+  <block wx:if="{{dashboard}}">
+    <!-- 问候 -->
+    <view class="child-greeting">
+      <view class="cg-title">{{greeting}}</view>
+      <view class="cg-sub">{{encourage}}</view>
+    </view>
+
+    <!-- 分享 -->
+    <button class="share-btn" open-type="share">🔗 分享给好友</button>
+
+    <!-- 积分卡 -->
+    <points-card balance="{{dashboard.points.balance}}" title="我的积分" subtitle="积分明细 >" variant="primary" />
+
+    <!-- 目标奖励 -->
+    <view wx:if="{{dashboard.rewardGoal}}" class="goal-card">
+      <view class="goal-head">
+        <view class="goal-label">
+          <icon name="gift" size="md" color="#FF9F43" />
+          <text>我的目标</text>
+        </view>
+        <text class="goal-name">{{dashboard.rewardGoal.name}}</text>
+      </view>
+      <view class="goal-progress-row">
+        <view class="goal-nums">
+          <text class="goal-current">{{dashboard.rewardGoal.cost - dashboard.rewardGoal.remaining}}</text>
+          <text class="goal-split">/</text>
+          <text class="goal-total">{{dashboard.rewardGoal.cost}}</text>
+          <text class="goal-unit">积分</text>
+        </view>
+        <view class="goal-remain">还差 {{dashboard.rewardGoal.remaining}} 积分</view>
+      </view>
+      <view class="progress-bar goal-bar">
+        <view class="progress-fill" style="width: {{goalProgress}}%;"></view>
+      </view>
+    </view>
+
+    <!-- 今日任务 -->
+    <section-header title="今日任务" extra="{{dashboard.todayTasks.length}} 个 >" showArrow bind:tap="goTasks" />
+    <task-card
+      wx:for="{{dashboard.todayTasks}}"
+      wx:key="id"
+      title="{{item.task.title}}"
+      points="{{item.task.rewardPoints}}"
+      status="{{item.status}}"
+      statusText="{{item.statusText}}"
+      instanceId="{{item.id}}"
+      taskType="{{item.task.taskType}}"
+      canAction="{{item.status === 'PENDING'}}"
+      bind:action="onTaskAction"
+      bind:tap="onTaskTap"
+    />
+    <empty-state wx:if="{{!loading && dashboard.todayTasks.length === 0}}" text="今天还没有任务，去奖励中心看看目标吧" emoji="🌱" showAction actionText="去奖励中心" bind:action="goRewards" />
+
+    <!-- 奖励中心入口 -->
+    <section-header title="奖励中心" extra="查看全部 >" showArrow bind:tap="goRewards" />
+    <view class="reward-entry" bindtap="goRewards">
+      <view class="re-icon">🎁</view>
+      <view class="re-body">
+        <view class="re-title">兑换喜欢的奖励</view>
+        <view class="re-sub">用积分兑换奖励，继续努力吧</view>
+      </view>
+      <text class="re-arrow">›</text>
+    </view>
+
+    <!-- 最近动态 -->
+    <section-header title="最近动态" extra="查看全部 >" showArrow bind:tap="goTasks" />
+    <view wx:if="{{activitiesView.length > 0}}" class="timeline-card">
+      <view class="tl-item" wx:for="{{activitiesView}}" wx:key="at">
+        <view class="tl-dot {{item.status}}"></view>
+        <view class="tl-body">
+          <view class="tl-text">{{item.text}}</view>
+          <view class="tl-time">{{item.at}}</view>
+        </view>
+      </view>
+    </view>
+    <empty-state wx:if="{{!loading && activitiesView.length === 0}}" text="还没有动态记录" emoji="🌱" />
+  </block>
+
+  <nav-bar role="CHILD" active="home" />
+</view>

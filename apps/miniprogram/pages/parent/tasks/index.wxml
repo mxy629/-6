@@ -1,0 +1,45 @@
+<view class="page">
+  <top-bar showBack="{{true}}" title="任务" />
+  <loading show="{{loading}}" type="skeleton" rows="3" />
+
+  <view class="filters">
+    <view class="search-wrap">
+      <icon name="review" size="sm" color="#999999" />
+      <input class="search-input" placeholder="搜索任务名称" value="{{keyword}}" bindinput="onSearch" />
+    </view>
+    <scroll-view class="type-scroll" scroll-x="true">
+      <view
+        wx:for="{{typeLabels}}"
+        wx:key="index"
+        class="chip {{typeFilter === typeValues[index] ? 'chip-active' : ''}}"
+        data-index="{{index}}"
+        bindtap="onTypeFilter"
+      >{{item}}</view>
+    </scroll-view>
+  </view>
+
+  <view class="task-list-card">
+    <view class="t-item" wx:for="{{displayTasks}}" wx:key="id">
+      <view class="t-icon">{{item.taskType === 'STUDY' ? '📖' : item.taskType === 'HOUSEWORK' ? '🧹' : item.taskType === 'SPORT' ? '🏃' : item.taskType === 'HABIT' ? '🌱' : '🌟'}}</view>
+      <view class="t-body">
+        <view class="t-title-row">
+          <text class="t-title">{{item.title}}</text>
+          <text class="t-points">+{{item.rewardPoints}} ⭐</text>
+        </view>
+        <view class="t-meta">共 {{item.instanceCount}} 次 · {{item.status === 'ACTIVE' ? '进行中' : '草稿'}} · {{item.childName}}</view>
+      </view>
+      <view class="t-actions">
+        <view class="t-edit" data-id="{{item.id}}" bindtap="edit">编辑</view>
+        <view class="t-del" data-id="{{item.id}}" bindtap="remove">删除</view>
+      </view>
+    </view>
+  </view>
+
+  <empty-state wx:if="{{!loading && displayTasks.length === 0}}" text="没有匹配的任务" emoji="📝" />
+
+  <view class="fab" bindtap="goForm">
+    <icon name="add" size="lg" color="#FFFFFF" />
+  </view>
+
+  <nav-bar role="PARENT" active="tasks" />
+</view>

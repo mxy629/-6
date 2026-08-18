@@ -1,0 +1,47 @@
+.balance-card {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: var(--color-surface);
+  text-align: center;
+  padding: 40rpx;
+}
+
+.bal-label {
+  font-size: 26rpx;
+  opacity: 0.9;
+}
+
+.bal-num {
+  font-size: 64rpx;
+  font-weight: 800;
+  margin-top: 8rpx;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx 28rpx;
+}
+
+.row-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.row-desc {
+  font-size: 28rpx;
+}
+
+.row-amt {
+  font-size: 34rpx;
+  font-weight: 700;
+  margin-left: 20rpx;
+}
+
+.row-amt.plus {
+  color: var(--color-primary-dark);
+}
+
+.row-amt.minus {
+  color: var(--color-danger);
+}

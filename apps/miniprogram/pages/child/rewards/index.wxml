@@ -1,0 +1,22 @@
+<view class="page">
+  <loading show="{{loading}}" />
+  <view class="balance-tip">可用积分：<text class="bt-num">{{balance}}</text></view>
+
+  <view class="grid">
+    <reward-card
+      wx:for="{{rewards}}"
+      wx:key="id"
+      name="{{item.name}}"
+      pointsCost="{{item.pointsCost}}"
+      remaining="{{item.remaining}}"
+      imageUrl="{{item.imageUrl}}"
+      rewardId="{{item.id}}"
+      goal="{{item.isGoal}}"
+      bind:action="onRedeem"
+      bind:setgoal="onSetGoal"
+    />
+  </view>
+  <empty-state wx:if="{{!loading && rewards.length === 0}}" text="暂时还没有奖品" />
+
+  <nav-bar role="CHILD" active="rewards" />
+</view>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>打卡星球 · MVP 验收报告</title>
+<style>
+  :root {
+    --bg: #f6f8fb;
+    --card: #ffffff;
+    --ink: #1f2937;
+    --muted: #6b7280;
+    --line: #e5e7eb;
+    --green: #16a34a;
+    --green-bg: #ecfdf5;
+    --blue: #2563eb;
+    --blue-bg: #eff6ff;
+    --amber: #d97706;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 32px 20px 64px; }
+  header { text-align: center; margin-bottom: 28px; }
+  h1 { font-size: 26px; margin: 0 0 6px; }
+  .sub { color: var(--muted); font-size: 14px; }
+  .banner {
+    background: var(--green-bg);
+    border: 1px solid #bbf7d0;
+    color: var(--green);
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .stat {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+  }
+  .stat .num { font-size: 28px; font-weight: 700; color: var(--blue); }
+  .stat .lbl { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .flow {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+  }
+  .flow h2 {
+    font-size: 17px;
+    margin: 0 0 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tag {
+    font-size: 12px;
+    background: var(--blue-bg);
+    color: var(--blue);
+    border-radius: 999px;
+    padding: 2px 10px;
+    font-weight: 600;
+  }
+  .desc { color: var(--muted); font-size: 13px; margin: 0 0 12px; }
+  ul { list-style: none; margin: 0; padding: 0; }
+  li {
+    font-size: 14px;
+    padding: 6px 0 6px 28px;
+    position: relative;
+  }
+  li::before {
+    content: "✅";
+    position: absolute;
+    left: 0;
+    top: 6px;
+    font-size: 13px;
+  }
+  .loop {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+  }
+  .loop h2 { font-size: 17px; margin: 0 0 12px; }
+  .steps { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .step {
+    background: var(--blue-bg);
+    color: var(--blue);
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .arrow { color: var(--muted); font-size: 16px; }
+  footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 30px; }
+  code { background: #f1f5f9; padding: 1px 6px; border-radius: 5px; font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>打卡星球 · MVP 验收报告</h1>
+    <div class="sub">家长-孩子 任务 / 积分 / 奖励 闭环 · 后端端到端验收（流程 A–E）</div>
+  </header>
+
+  <div class="banner">✅ 全部 24 项断言通过，退出码 0 — 核心闭环可运行</div>
+
+  <div class="summary">
+    <div class="stat"><div class="num">24</div><div class="lbl">通过断言</div></div>
+    <div class="stat"><div class="num">5</div><div class="lbl">验收流程 A–E</div></div>
+    <div class="stat"><div class="num">0</div><div class="lbl">失败 / 错误</div></div>
+  </div>
+
+  <div class="loop">
+    <h2>核心闭环</h2>
+    <div class="steps">
+      <span class="step">家长发布任务</span><span class="arrow">→</span>
+      <span class="step">孩子完成任务</span><span class="arrow">→</span>
+      <span class="step">孩子提交证明</span><span class="arrow">→</span>
+      <span class="step">家长审核</span><span class="arrow">→</span>
+      <span class="step">积分到账</span><span class="arrow">→</span>
+      <span class="step">孩子兑换奖励</span><span class="arrow">→</span>
+      <span class="step">家长确认</span>
+    </div>
+  </div>
+
+  <div class="flow">
+    <h2><span class="tag">A</span> 账号登录与鉴权</h2>
+    <p class="desc">家长微信登录（dev mock）、孩子账号+PIN 登录，返回 JWT；家长可查看归属孩子。</p>
+    <ul>
+      <li>家长微信登录获取 token</li>
+      <li>孩子 xiaoyu 登录获取 token</li>
+      <li>家长可看到自己孩子</li>
+    </ul>
+  </div>
+
+  <div class="flow">
+    <h2><span class="tag">B</span> 任务发布 → 提交 → 审核通过 → 积分+20</h2>
+    <p class="desc">验证积分仅发放一次（幂等），重复通过不再加分，流水仅一条 TASK_REWARD。</p>
+    <ul>
+      <li>家长发布任务成功</li>
+      <li>孩子今日任务包含新任务</li>
+      <li>孩子提交任务成功</li>
+      <li>家长看到待审核任务(SUBMITTED)</li>
+      <li>家长首次通过任务</li>
+      <li>已通过任务重复通过幂等(积分不再增加)</li>
+      <li>孩子积分 +20 (360 → 380)</li>
+      <li>积分流水仅一条 TASK_REWARD(防重复发积分)</li>
+    </ul>
+  </div>
+
+  <div class="flow">
+    <h2><span class="tag">C</span> 驳回 → 重新提交 → 通过(只一次积分)</h2>
+    <p class="desc">驳回不发放积分；重新提交并审核通过仅 +10，不重复累计。</p>
+    <ul>
+      <li>家长驳回任务</li>
+      <li>驳回不发放积分</li>
+      <li>孩子重新提交成功</li>
+      <li>重新提交通过后只 +10 (380 → 390)</li>
+    </ul>
+  </div>
+
+  <div class="flow">
+    <h2><span class="tag">D</span> 兑换奖励 → 扣积分-200</h2>
+    <p class="desc">孩子在奖励商店兑换「看电影一次」(200 积分)，余额相应扣减。</p>
+    <ul>
+      <li>孩子看到奖励「看电影一次」200积分</li>
+      <li>孩子兑换成功</li>
+      <li>兑换后积分 -200 (390 → 190)</li>
+    </ul>
+  </div>
+
+  <div class="flow">
+    <h2><span class="tag">E</span> 家长拒绝兑换 → 自动退款</h2>
+    <p class="desc">拒绝兑换后积分自动退回，流水同时存在 REDEEM 与 REFUND，重复拒绝被拒（幂等）。</p>
+    <ul>
+      <li>家长看到待确认兑换</li>
+      <li>家长拒绝兑换</li>
+      <li>拒绝后积分自动退回 (190 → 390)</li>
+      <li>积分流水同时存在 REDEEM 与 REFUND</li>
+      <li>已拒绝兑换重复拒绝被拒绝(幂等)</li>
+    </ul>
+  </div>
+
+  <footer>
+    运行环境：NestJS + TypeScript 后端 · Prisma + SQLite（开发）· 本地 <code>http://localhost:3000/api/v1</code><br/>
+    验收脚本：<code>apps/server/scripts/acceptance.mjs</code> · 生成时间 2026-08-18
+  </footer>
+</div>
+</body>
+</html>

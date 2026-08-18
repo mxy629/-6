@@ -1,0 +1,41 @@
+{
+  "pages": [
+    "pages/login/index",
+    "pages/child/home/index",
+    "pages/child/tasks/index",
+    "pages/child/task-detail/index",
+    "pages/child/points/index",
+    "pages/child/rewards/index",
+    "pages/child/profile/index",
+    "pages/parent/home/index",
+    "pages/parent/tasks/index",
+    "pages/parent/task-form/index",
+    "pages/parent/reviews/index",
+    "pages/parent/rewards/index",
+    "pages/parent/redemptions/index",
+    "pages/parent/profile/index",
+    "pages/parent/ledger/index"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarTitleText": "成长星球",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#F6F7F9"
+  },
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents",
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {
+    "nav-bar": "components/nav-bar/index",
+    "icon": "components/icon/index",
+    "section-header": "components/section-header/index",
+    "skeleton": "components/skeleton/index",
+    "loading": "components/loading/index",
+    "empty-state": "components/empty-state/index",
+    "status-badge": "components/status-badge/index",
+    "points-card": "components/points-card/index",
+    "task-card": "components/task-card/index",
+    "reward-card": "components/reward-card/index",
+    "top-bar": "components/top-bar/index"
+  }
+}

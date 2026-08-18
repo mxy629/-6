@@ -1,0 +1,9 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "nav-bar": "../../../components/nav-bar/index",
+    "loading": "../../../components/loading/index",
+    "empty-state": "../../../components/empty-state/index",
+    "top-bar": "../../../components/top-bar/index"
+  }
+}

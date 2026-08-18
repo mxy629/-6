@@ -1,0 +1,15 @@
+<view class="reward-card" bindtap="onTap">
+  <view wx:if="{{showGoal}}" class="rc-goal {{goal ? 'on' : ''}}" catchtap="onSetGoal">{{goal ? '🎯 目标' : '设为目标'}}</view>
+  <image wx:if="{{imageUrl}}" class="rc-img" src="{{imageUrl}}" mode="aspectFill" />
+  <view class="rc-img rc-img--ph" wx:else>🎁</view>
+  <view class="rc-body">
+    <view class="rc-name">{{name}}</view>
+    <view class="rc-cost">
+      <text class="rc-star">⭐</text>
+      <text>{{pointsCost}}</text>
+    </view>
+    <view wx:if="{{remaining > 0}}" class="rc-tip">还差 {{remaining}} 积分</view>
+    <view wx:else class="rc-tip rc-tip--ok">可以兑换啦</view>
+  </view>
+  <view wx:if="{{remaining <= 0}}" class="rc-btn" catchtap="onAction">立即兑换</view>
+</view>

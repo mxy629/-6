@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "任务",
+  "usingComponents": {
+    "nav-bar": "../../../components/nav-bar/index",
+    "task-card": "../../../components/task-card/index",
+    "empty-state": "../../../components/empty-state/index",
+    "loading": "../../../components/loading/index"
+  }
+}

@@ -1,0 +1,19 @@
+<view class="page">
+  <top-bar showBack="{{true}}" title="积分流水" />
+  <loading show="{{loading}}" />
+  <view class="card balance-card">
+    <view class="bal-label">当前积分</view>
+    <view class="bal-num">{{balance}}</view>
+  </view>
+
+  <view class="card row" wx:for="{{ledger}}" wx:key="id">
+    <view class="row-main">
+      <view class="row-desc">{{item.description || item.bizType}}</view>
+      <view class="muted">{{item.createdAt}}</view>
+    </view>
+    <view class="row-amt {{item.amount >= 0 ? 'plus' : 'minus'}}">{{item.amount >= 0 ? '+' : ''}}{{item.amount}}</view>
+  </view>
+  <empty-state wx:if="{{!loading && ledger.length === 0}}" text="还没有积分变动" />
+
+  <nav-bar role="PARENT" active="" />
+</view>

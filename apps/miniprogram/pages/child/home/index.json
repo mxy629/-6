@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "首页",
+  "usingComponents": {
+    "nav-bar": "../../../components/nav-bar/index",
+    "points-card": "../../../components/points-card/index",
+    "task-card": "../../../components/task-card/index",
+    "empty-state": "../../../components/empty-state/index",
+    "loading": "../../../components/loading/index",
+    "icon": "../../../components/icon/index",
+    "section-header": "../../../components/section-header/index"
+  }
+}

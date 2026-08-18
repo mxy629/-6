@@ -1,0 +1,192 @@
+// Prisma schema for 成长星球 (Growth Planet)
+// 开发阶段默认使用 SQLite，方便本地直接运行；
+// 生产环境请改为 provider = "mysql" 并配置对应的 DATABASE_URL。
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String   @id @default(cuid())
+  role          String   // PARENT | CHILD
+  nickname      String
+  avatarUrl     String?
+  phone         String?  @unique
+  wechatOpenId  String?  @unique
+  status        String   @default("ACTIVE")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  children      ChildProfile[] @relation("ParentChildren")
+  parentProfiles ChildProfile[] @relation("ChildParent")
+  redemptions   RewardRedemption[] @relation("UserRedemptions")
+}
+
+// 短信验证码（注册 / 登录）。开发期由 mock provider 生成并回传，生产环境接真实短信服务。
+model SmsCode {
+  id        String   @id @default(cuid())
+  phone     String
+  code      String
+  purpose   String   // REGISTER | LOGIN
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([phone, purpose])
+}
+
+model ChildProfile {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  parentUserId    String
+  loginName       String   @unique
+  pinPasswordHash String
+  pointsBalance   Int      @default(0)
+  level           Int      @default(1)
+  goalRewardId    String?  // 孩子自选的目标奖励（Reward.id），空表示由系统选最便宜
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user            User     @relation("ParentChildren", fields: [userId], references: [id], onDelete: Cascade)
+  parent          User     @relation("ChildParent", fields: [parentUserId], references: [id])
+  wallet          PointsWallet?
+  ledgers         PointsLedger[]
+}
+
+model Task {
+  id               String   @id @default(cuid())
+  parentId         String
+  childId          String
+  title            String
+  description      String?
+  rewardPoints     Int
+  taskType         String   @default("OTHER")
+  repeatType       String   @default("NONE")
+  startDate        DateTime?
+  endDate          DateTime?
+  deadlineTime     String? // "HH:mm"
+  requireTextProof Boolean  @default(false)
+  requireImageProof Boolean @default(false)
+  status           String   @default("ACTIVE")
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  instances        TaskInstance[]
+}
+
+model TaskInstance {
+  id         String    @id @default(cuid())
+  taskId     String
+  childId    String
+  date       DateTime
+  deadlineAt DateTime?
+  status     String    @default("PENDING")
+  submittedAt DateTime?
+  reviewedAt DateTime?
+  reviewedBy String?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  task       Task           @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  submissions TaskSubmission[]
+}
+
+model TaskSubmission {
+  id          String   @id @default(cuid())
+  taskInstanceId String
+  childId     String
+  textProof   String?
+  rejectReason String?
+  status      String   @default("PENDING") // PENDING | APPROVED | REJECTED
+  createdAt   DateTime @default(now())
+
+  taskInstance TaskInstance        @relation(fields: [taskInstanceId], references: [id], onDelete: Cascade)
+  images      TaskSubmissionImage[]
+}
+
+model TaskSubmissionImage {
+  id          String   @id @default(cuid())
+  submissionId String
+  url         String
+  createdAt   DateTime @default(now())
+
+  submission  TaskSubmission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+}
+
+model PointsWallet {
+  id        String   @id @default(cuid())
+  childId   String   @unique
+  balance   Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  child     ChildProfile @relation(fields: [childId], references: [id])
+}
+
+model PointsLedger {
+  id           String   @id @default(cuid())
+  childId      String
+  type         String // TASK_REWARD | REWARD_REDEEM | REWARD_REFUND | MANUAL_ADJUST
+  amount       Int
+  balanceBefore Int
+  balanceAfter Int
+  bizType      String
+  bizId        String
+  bizKey       String   @unique
+  description  String?
+  createdAt    DateTime @default(now())
+
+  child        ChildProfile @relation(fields: [childId], references: [id])
+}
+
+model Reward {
+  id          String   @id @default(cuid())
+  parentId    String
+  childId     String? // null 表示对所有孩子可见
+  name        String
+  description  String?
+  imageUrl    String?
+  pointsCost  Int
+  stock       Int      @default(0)
+  status      String   @default("DRAFT") // DRAFT | ACTIVE | INACTIVE
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  redemptions RewardRedemption[]
+}
+
+model RewardRedemption {
+  id          String    @id @default(cuid())
+  rewardId    String
+  childId     String
+  parentId    String
+  pointsCost  Int
+  status      String    @default("PENDING") // PENDING | APPROVED | REJECTED | FULFILLED | CANCELLED
+  createdAt   DateTime  @default(now())
+  reviewedAt  DateTime?
+  completedAt DateTime?
+
+  reward       Reward @relation(fields: [rewardId], references: [id])
+  child        User   @relation("UserRedemptions", fields: [childId], references: [id], onDelete: Cascade)
+}
+
+// 成长动态时间线（真表）。childId 存 ChildProfile.id（与 PointsLedger/PointsWallet 一致），
+// parentId 用于按家长聚合；均为纯字符串字段，无外键，避免级联删除触发 RESTRICT。
+model Activity {
+  id        String   @id @default(cuid())
+  childId   String
+  parentId  String
+  type      String   // TASK_DONE | TASK_SUBMITTED | TASK_REJECTED | REDEMPTION_APPLIED | REDEMPTION_APPROVED | REDEMPTION_REJECTED | REDEMPTION_FULFILLED | CHILD_JOINED | TASK_PUBLISHED
+  text      String
+  status    String?
+  refType   String?  // TASK | REWARD | REDEMPTION
+  refId     String?
+  createdAt DateTime @default(now())
+
+  @@index([childId, createdAt])
+  @@index([parentId, createdAt])
+}

@@ -1,0 +1,11 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "我的",
+  "usingComponents": {
+    "nav-bar": "../../../components/nav-bar/index",
+    "loading": "../../../components/loading/index",
+    "top-bar": "../../../components/top-bar/index",
+    "icon": "../../../components/icon/index",
+    "section-header": "../../../components/section-header/index"
+  }
+}

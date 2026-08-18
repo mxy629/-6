@@ -1,0 +1,37 @@
+<view class="page">
+  <loading show="{{loading}}" />
+  <block wx:if="{{detail}}">
+    <view class="card">
+      <view class="row">
+        <text class="t-title">{{detail.task.title}}</text>
+        <status-badge status="{{detail.status}}" text="{{statusText}}" />
+      </view>
+      <view class="muted" wx:if="{{detail.task.description}}">{{detail.task.description}}</view>
+      <view class="meta">奖励：+{{detail.task.rewardPoints}} 积分</view>
+      <view class="meta" wx:if="{{detail.task.deadlineAt}}">截止：{{detail.task.deadlineAt}}</view>
+    </view>
+
+    <view class="card reject" wx:if="{{rejectReason}}">
+      <view class="reject-title">家长反馈</view>
+      <view class="reject-text">{{rejectReason}}</view>
+    </view>
+
+    <view class="card">
+      <view class="label">完成说明</view>
+      <textarea class="textarea" placeholder="写写你完成了什么吧～" value="{{text}}" bindinput="onText" />
+
+      <view class="label">上传照片</view>
+      <view class="imgs">
+        <view class="img-item" wx:for="{{images}}" wx:key="*this" data-idx="{{index}}" bindtap="removeImage">
+          <image src="{{item}}" mode="aspectFill" class="img" />
+          <view class="img-del">×</view>
+        </view>
+        <view class="img-add" bindtap="chooseImage" wx:if="{{images.length < 3}}">＋</view>
+      </view>
+
+      <button class="btn-primary" loading="{{submitting}}" bindtap="submit">
+        {{detail.status === 'REJECTED' ? '重新提交' : '提交任务'}}
+      </button>
+    </view>
+  </block>
+</view>

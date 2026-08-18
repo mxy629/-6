@@ -1,0 +1,19 @@
+.filters {
+  display: flex;
+  gap: 16rpx;
+  margin-bottom: 20rpx;
+  flex-wrap: wrap;
+}
+
+.filter {
+  background: var(--color-surface);
+  color: var(--color-text-tertiary);
+  font-size: 26rpx;
+  padding: 12rpx 28rpx;
+  border-radius: 24rpx;
+}
+
+.filter.active {
+  background: var(--color-primary);
+  color: var(--color-surface);
+}

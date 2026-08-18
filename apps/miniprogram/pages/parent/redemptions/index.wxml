@@ -1,0 +1,28 @@
+<view class="page">
+  <top-bar showBack="{{true}}" title="兑换管理" />
+  <loading show="{{loading}}" type="skeleton" rows="2" />
+
+  <view class="list-card">
+    <view class="rd-item" wx:for="{{list}}" wx:key="id">
+      <view class="rd-head">
+        <view class="rd-info">
+          <view class="rd-name">{{item.reward.name}}</view>
+          <view class="rd-sub">{{item.childName}} · {{item.pointsCost}} 积分 · {{item.timeText}}</view>
+        </view>
+        <status-badge status="{{item.status === 'PENDING' ? 'SUBMITTED' : item.status === 'APPROVED' ? 'APPROVED' : item.status === 'FULFILLED' ? 'FULFILLED' : 'REJECTED'}}" text="{{item.statusText}}" />
+      </view>
+
+      <view class="rd-actions" wx:if="{{item.status === 'PENDING'}}">
+        <button class="btn btn-danger-ghost btn-sm" data-id="{{item.id}}" bindtap="reject">拒绝</button>
+        <button class="btn btn-primary btn-sm" data-id="{{item.id}}" bindtap="approve">确认兑换</button>
+      </view>
+      <view class="rd-actions" wx:if="{{item.status === 'APPROVED'}}">
+        <button class="btn btn-primary btn-sm" data-id="{{item.id}}" bindtap="fulfill">完成奖励</button>
+      </view>
+    </view>
+  </view>
+
+  <empty-state wx:if="{{!loading && list.length === 0}}" text="暂无兑换申请" emoji="🎁" />
+
+  <nav-bar role="PARENT" active="rewards" />
+</view>

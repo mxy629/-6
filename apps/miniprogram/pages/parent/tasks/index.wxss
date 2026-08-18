@@ -1,0 +1,140 @@
+.filters {
+  margin-bottom: 20rpx;
+}
+
+.search-wrap {
+  display: flex;
+  align-items: center;
+  background: var(--color-surface);
+  border-radius: 18rpx;
+  padding: 16rpx 20rpx;
+  margin-bottom: 16rpx;
+  border: 1rpx solid var(--color-border);
+}
+
+.search-input {
+  flex: 1;
+  margin-left: 12rpx;
+  font-size: 28rpx;
+  color: var(--color-text-primary);
+}
+
+.type-scroll {
+  white-space: nowrap;
+}
+
+.chip {
+  display: inline-block;
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
+  font-size: 24rpx;
+  padding: 10rpx 24rpx;
+  border-radius: 999rpx;
+  margin-right: 12rpx;
+  border: 1rpx solid var(--color-border);
+}
+
+.chip-active {
+  background: var(--color-primary);
+  color: var(--color-surface);
+  border-color: var(--color-primary);
+}
+
+.task-list-card {
+  background: var(--color-surface);
+  border-radius: 24rpx;
+  padding: 8rpx 24rpx;
+  border: 1rpx solid var(--color-border);
+}
+
+.t-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid var(--color-divider);
+}
+
+.t-item:last-child {
+  border-bottom: none;
+}
+
+.t-icon {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 16rpx;
+  background: var(--color-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  margin-right: 18rpx;
+  flex-shrink: 0;
+}
+
+.t-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.t-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6rpx;
+}
+
+.t-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-right: 12rpx;
+}
+
+.t-points {
+  font-size: 24rpx;
+  font-weight: 700;
+  color: var(--color-warning);
+  flex-shrink: 0;
+}
+
+.t-meta {
+  font-size: 22rpx;
+  color: var(--color-text-tertiary);
+}
+
+.t-actions {
+  display: flex;
+  gap: 20rpx;
+  margin-left: 16rpx;
+  font-size: 24rpx;
+}
+
+.t-edit {
+  color: var(--color-primary);
+}
+
+.t-del {
+  color: var(--color-danger);
+}
+
+.fab {
+  position: fixed;
+  right: 32rpx;
+  bottom: calc(152rpx + env(safe-area-inset-bottom));
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8rpx 24rpx rgba(52, 179, 104, 0.3);
+  z-index: 50;
+}
+
+.fab:active {
+  transform: scale(0.95);
+}

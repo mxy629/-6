@@ -1,0 +1,12 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "奖励管理",
+  "usingComponents": {
+    "nav-bar": "../../../components/nav-bar/index",
+    "loading": "../../../components/loading/index",
+    "empty-state": "../../../components/empty-state/index",
+    "top-bar": "../../../components/top-bar/index",
+    "icon": "../../../components/icon/index",
+    "status-badge": "../../../components/status-badge/index"
+  }
+}

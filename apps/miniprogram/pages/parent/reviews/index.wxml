@@ -1,0 +1,40 @@
+<view class="page">
+  <top-bar showBack="{{true}}" title="待审核" />
+  <loading show="{{loading}}" type="skeleton" rows="2" />
+
+  <view wx:if="{{reviews.length > 0}}" class="pending-badge">
+    <text class="pb-dot"></text>
+    <text class="pb-text">{{reviews.length}} 个待处理</text>
+  </view>
+
+  <view class="review-card" wx:for="{{reviews}}" wx:key="id">
+    <view class="rv-head">
+      <image wx:if="{{item.childAvatar}}" class="rv-avatar" src="{{item.childAvatar}}" mode="aspectFill" />
+      <view wx:else class="rv-avatar rv-default">{{item.childName[0]}}</view>
+      <view class="rv-meta">
+        <view class="rv-child">{{item.childName}}</view>
+        <view class="rv-time">{{item.submittedAt}} 提交</view>
+      </view>
+      <view class="rv-points">+{{item.task.rewardPoints}} ⭐</view>
+    </view>
+
+    <view class="rv-title">{{item.task.title}}</view>
+
+    <view class="rv-proof" wx:if="{{item.submission}}">
+      <view class="rv-proof-label">完成证明</view>
+      <view class="rv-text" wx:if="{{item.submission.textProof}}">{{item.submission.textProof}}</view>
+      <view class="rv-imgs" wx:if="{{item.submission.images.length}}">
+        <image wx:for="{{item.submission.images}}" wx:for-item="img" wx:key="url" src="{{img.url}}" class="rv-img" mode="aspectFill" />
+      </view>
+    </view>
+
+    <view class="rv-actions">
+      <button class="btn btn-danger-ghost btn-sm" data-id="{{item.id}}" bindtap="reject">驳回</button>
+      <button class="btn btn-primary btn-sm" data-id="{{item.id}}" bindtap="approve">通过</button>
+    </view>
+  </view>
+
+  <empty-state wx:if="{{!loading && reviews.length === 0}}" text="暂无待审核任务，孩子提交后会出现在这里" emoji="🎉" />
+
+  <nav-bar role="PARENT" active="reviews" />
+</view>

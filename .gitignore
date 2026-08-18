@@ -1,0 +1,14 @@
+node_modules/
+dist/
+*.log
+.env
+.env.local
+.DS_Store
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+apps/server/prisma/migrations/*/migration_engine.log
+apps/miniprogram/miniprogram_npm/
+apps/miniprogram/**/*.js
+project.private.config.json

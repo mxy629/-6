@@ -1,0 +1,90 @@
+/* ============================================================
+   成长星球 Design Tokens
+   统一颜色 / 字号 / 间距 / 圆角 / 阴影
+   注意：WXSS 要求自定义属性必须声明在选择器内（此处挂在 page 上，
+   全局页面与组件均可继承这些变量）。
+   ============================================================ */
+
+page {
+  /* 品牌色 */
+  --color-primary: #34B368;
+  --color-primary-dark: #2A9A57;
+  --color-primary-light: #E8F8EF;
+  --color-primary-soft: #D1F1DD;
+  --color-primary-disabled: #A9DCBE;
+
+  /* 中性色 */
+  --color-bg: #F6F7F9;
+  --color-surface: #FFFFFF;
+  --color-surface-elevated: #FFFFFF;
+  --color-border: #EBEEF2;
+  --color-divider: #F0F2F5;
+
+  /* 文字 */
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #666666;
+  --color-text-tertiary: #999999;
+  --color-text-placeholder: #BFBFBF;
+  --color-text-inverse: #FFFFFF;
+
+  /* 功能色 */
+  --color-success: #34B368;
+  --color-success-light: #E8F8EF;
+  --color-warning: #FF9F43;
+  --color-warning-light: #FFF4E6;
+  --color-danger: #FF6B6B;
+  --color-danger-light: #FFEBEB;
+  --color-danger-dark: #D9434E;
+  --color-info: #4D96FF;
+  --color-info-light: #EDF5FF;
+
+  /* 积分 / 奖励 */
+  --color-points: #FFC542;
+  --color-points-light: #FFF8E1;
+  --color-reward: #FF9F43;
+
+  /* 字号 */
+  --font-display: 64rpx;
+  --font-h1: 48rpx;
+  --font-h2: 40rpx;
+  --font-h3: 34rpx;
+  --font-title: 30rpx;
+  --font-body: 28rpx;
+  --font-caption: 24rpx;
+  --font-xs: 22rpx;
+
+  /* 字重 */
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+
+  /* 间距 */
+  --space-1: 4rpx;
+  --space-2: 8rpx;
+  --space-3: 12rpx;
+  --space-4: 16rpx;
+  --space-5: 20rpx;
+  --space-6: 24rpx;
+  --space-8: 32rpx;
+  --space-10: 40rpx;
+  --space-12: 48rpx;
+
+  /* 圆角 */
+  --radius-sm: 12rpx;
+  --radius-md: 18rpx;
+  --radius-lg: 24rpx;
+  --radius-xl: 32rpx;
+  --radius-full: 999rpx;
+
+  /* 阴影 */
+  --shadow-sm: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 8rpx 28rpx rgba(0, 0, 0, 0.08);
+  --shadow-primary: 0 8rpx 24rpx rgba(52, 179, 104, 0.22);
+
+  /* TabBar */
+  --tabbar-height: 112rpx;
+  --tabbar-bg: #FFFFFF;
+  --tabbar-shadow: 0 -2rpx 12rpx rgba(0, 0, 0, 0.05);
+}

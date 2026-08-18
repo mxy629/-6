@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "奖品",
+  "usingComponents": {
+    "nav-bar": "../../../components/nav-bar/index",
+    "reward-card": "../../../components/reward-card/index",
+    "empty-state": "../../../components/empty-state/index",
+    "loading": "../../../components/loading/index"
+  }
+}

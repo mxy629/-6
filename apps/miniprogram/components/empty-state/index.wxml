@@ -1,0 +1,5 @@
+<view class="empty">
+  <view class="empty-emoji">{{emoji}}</view>
+  <view class="empty-text">{{text}}</view>
+  <view wx:if="{{showAction && actionText}}" class="empty-action" bindtap="onAction">{{actionText}}</view>
+</view>

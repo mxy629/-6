@@ -1,0 +1,16 @@
+.balance-tip {
+  font-size: 28rpx;
+  margin: 12rpx 0 20rpx;
+}
+
+.bt-num {
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 34rpx;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}

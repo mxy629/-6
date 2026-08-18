@@ -1,0 +1,16 @@
+<view class="task-card {{compact ? 'task-card--compact' : ''}}" bindtap="onTap">
+  <view class="tc-icon">{{icon}}</view>
+  <view class="tc-body">
+    <view class="tc-title-row">
+      <text class="tc-title">{{title}}</text>
+      <text class="tc-points">+{{points}} <text class="tc-points-star">⭐</text></text>
+    </view>
+    <view wx:if="{{deadline}}" class="tc-meta">
+      <text class="tc-meta-text">⏰ {{deadline}}</text>
+    </view>
+    <view class="tc-footer">
+      <view class="tc-status" style="{{statusStyle}}">{{statusText}}</view>
+      <view wx:if="{{canAction}}" class="tc-action" catchtap="onAction">去完成</view>
+    </view>
+  </view>
+</view>

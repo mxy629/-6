@@ -1,0 +1,22 @@
+{
+  "name": "growth-planet",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:server": "npm run start:dev --workspace=@growth-planet/server",
+    "build:server": "npm run build --workspace=@growth-planet/server",
+    "db:generate": "npm run db:generate --workspace=@growth-planet/server",
+    "db:migrate": "npm run db:migrate --workspace=@growth-planet/server",
+    "db:seed": "npm run db:seed --workspace=@growth-planet/server",
+    "db:studio": "npm run db:studio --workspace=@growth-planet/server",
+    "lint": "npm run lint --workspace=@growth-planet/server"
+  },
+  "devDependencies": {
+    "@types/node": "^20.16.5",
+    "typescript": "^5.5.4"
+  }
+}

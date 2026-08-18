@@ -1,0 +1,15 @@
+<view wx:if="{{show}}" class="loading">
+  <block wx:if="{{type === 'skeleton'}}">
+    <view class="skeleton-row" wx:for="{{rows}}" wx:key="*this">
+      <view class="sk-avatar"></view>
+      <view class="sk-body">
+        <view class="sk-line"></view>
+        <view class="sk-line sk-line-sm"></view>
+      </view>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="spinner"></view>
+    <view class="loading-text">{{text}}</view>
+  </block>
+</view>

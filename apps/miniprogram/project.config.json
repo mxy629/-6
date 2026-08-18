@@ -1,0 +1,65 @@
+{
+  "appid": "wxb0bbe98b2af3b36a",
+  "compileType": "miniprogram",
+  "libVersion": "3.17.1",
+  "setting": {
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": true,
+    "ts2js": false,
+    "compileWorklet": false,
+    "uglifyFileName": false,
+    "uploadWithSourceMap": true,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true,
+    "minifyWXML": true,
+    "localPlugins": false,
+    "disableUseStrict": false,
+    "useCompilerPlugins": false,
+    "condition": false,
+    "swc": false,
+    "disableSWC": true,
+    "ignoreUploadUnusedFiles": true,
+    "ignoreDevUnusedFiles": false,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    }
+  },
+  "projectname": "growth-planet-miniprogram",
+  "miniprogramRoot": "./",
+  "simulatorPluginLibVersion": {},
+  "packOptions": {
+    "ignore": [
+      {
+        "type": "regexp",
+        "value": "\\.ts$"
+      },
+      {
+        "type": "file",
+        "value": "typings.d.ts"
+      },
+      {
+        "type": "regexp",
+        "value": "^types/"
+      },
+      {
+        "type": "file",
+        "value": "package.json"
+      },
+      {
+        "type": "file",
+        "value": "tsconfig.json"
+      },
+      {
+        "type": "file",
+        "value": "project.private.config.json"
+      }
+    ],
+    "include": []
+  },
+  "editorSetting": {}
+}

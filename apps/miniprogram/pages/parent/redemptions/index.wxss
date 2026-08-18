@@ -1,0 +1,49 @@
+.list-card {
+  background: var(--color-surface);
+  border-radius: 24rpx;
+  padding: 8rpx 24rpx;
+  border: 1rpx solid var(--color-border);
+}
+
+.rd-item {
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid var(--color-divider);
+}
+
+.rd-item:last-child {
+  border-bottom: none;
+}
+
+.rd-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.rd-info {
+  flex: 1;
+  min-width: 0;
+  margin-right: 16rpx;
+}
+
+.rd-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.rd-sub {
+  font-size: 22rpx;
+  color: var(--color-text-tertiary);
+  margin-top: 6rpx;
+}
+
+.rd-actions {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 20rpx;
+}
+
+.rd-actions .btn {
+  flex: 1;
+}

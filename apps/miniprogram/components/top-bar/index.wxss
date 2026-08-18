@@ -1,0 +1,66 @@
+.topbar {
+  /* 抵消父级 .page 的 24rpx 内边距，使顶栏通栏并贴顶 */
+  margin: -20rpx -20rpx 0;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  /* 为状态栏（刘海/时间电池）预留安全区，避免顶栏内容被遮挡 */
+  padding-top: calc(env(safe-area-inset-top) + 20rpx);
+  box-sizing: border-box;
+}
+
+.topbar-light {
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+}
+
+.topbar-green {
+  background: var(--color-primary);
+  color: var(--color-surface);
+}
+
+.tb-inner {
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.tb-left {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.tb-avatar {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 50%;
+  background: var(--color-primary-light);
+  margin-right: 14rpx;
+  flex: 0 0 auto;
+}
+
+.tb-default {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+}
+
+.tb-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  max-width: 300rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.tb-back {
+  font-size: 44rpx;
+  font-weight: 300;
+  margin-right: 12rpx;
+  line-height: 1;
+  padding: 0 8rpx;
+}

@@ -1,0 +1,10 @@
+<view class="section-header-root" bindtap="onTap">
+  <view class="section-title-line">
+    <view class="section-line"></view>
+    <text class="section-title-text">{{title}}</text>
+  </view>
+  <view wx:if="{{extra || showArrow}}" class="section-extra">
+    <text wx:if="{{extra}}">{{extra}}</text>
+    <text wx:if="{{showArrow}}" class="section-arrow">›</text>
+  </view>
+</view>

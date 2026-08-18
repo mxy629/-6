@@ -1,0 +1,85 @@
+<view class="page">
+  <top-bar showBack="{{true}}" title="{{editingId ? '编辑任务' : '发布任务'}}" />
+  <loading show="{{loading}}" />
+
+  <view class="form-section" wx:if="{{!loading}}">
+    <view class="section-label">基本信息</view>
+    <view class="card form-card">
+      <view class="form-cell">
+        <text class="form-cell-label">选择孩子</text>
+        <picker mode="selector" range="{{children}}" range-key="nickname" value="{{childIndex}}" bindchange="onChild">
+          <view class="picker-value">{{children[childIndex].nickname || '请选择'}}</view>
+        </picker>
+      </view>
+      <view class="form-cell column" style="align-items: flex-start;">
+        <text class="form-cell-label">任务名称</text>
+        <input class="input flat" placeholder="如：阅读20分钟" value="{{title}}" bindinput="onTitle" />
+      </view>
+      <view class="form-cell column" style="align-items: flex-start;">
+        <text class="form-cell-label">任务说明</text>
+        <textarea class="textarea flat" placeholder="选填，补充任务要求" value="{{description}}" bindinput="onDesc" />
+      </view>
+    </view>
+
+    <view class="section-label">任务奖励</view>
+    <view class="card form-card">
+      <view class="points-row">
+        <view class="points-stepper">
+          <view class="step-btn" bindtap="minus">-</view>
+          <input class="points-input" type="number" value="{{rewardPoints}}" bindinput="onPoints" />
+          <view class="step-btn" bindtap="plus">+</view>
+        </view>
+        <text class="points-unit">积分</text>
+      </view>
+      <view class="quick-points">
+        <view
+          wx:for="{{quickPoints}}"
+          wx:key="*this"
+          class="qp-chip {{rewardPoints === item ? 'on' : ''}}"
+          data-v="{{item}}"
+          bindtap="setPoints"
+        >+{{item}}</view>
+      </view>
+    </view>
+
+    <view class="section-label">任务时间</view>
+    <view class="card form-card">
+      <view class="form-cell">
+        <text class="form-cell-label">任务分类</text>
+        <picker mode="selector" range="{{taskTypeLabels}}" value="{{taskTypeIndex}}" bindchange="onTaskType">
+          <view class="picker-value">{{taskTypeLabels[taskTypeIndex]}}</view>
+        </picker>
+      </view>
+      <view class="form-cell">
+        <text class="form-cell-label">重复方式</text>
+        <picker mode="selector" range="{{repeatTypeLabels}}" value="{{repeatTypeIndex}}" bindchange="onRepeat">
+          <view class="picker-value">{{repeatTypeLabels[repeatTypeIndex]}}</view>
+        </picker>
+      </view>
+      <view class="form-cell">
+        <text class="form-cell-label">截止时间</text>
+        <picker mode="time" value="{{deadlineTime}}" bindchange="onDeadline">
+          <view class="picker-value">{{deadlineTime || '不限制'}}</view>
+        </picker>
+      </view>
+    </view>
+
+    <view class="section-label">完成要求</view>
+    <view class="card form-card">
+      <view class="form-cell row">
+        <text class="form-cell-label">要求文字说明</text>
+        <switch checked="{{requireText}}" bindchange="onRequireText" color="#34B368" />
+      </view>
+      <view class="form-cell row">
+        <text class="form-cell-label">要求上传照片</text>
+        <switch checked="{{requireImage}}" bindchange="onRequireImage" color="#34B368" />
+      </view>
+    </view>
+  </view>
+
+  <view class="form-footer">
+    <button class="btn btn-primary btn-block" loading="{{submitting}}" bindtap="submit">{{editingId ? '保存修改' : '发布任务'}}</button>
+  </view>
+
+  <view class="footer-spacer"></view>
+</view>
