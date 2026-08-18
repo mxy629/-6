@@ -43,10 +43,13 @@
 .input {
   background: var(--color-bg);
   border-radius: 16rpx;
-  padding: 22rpx;
+  padding: 0 22rpx;
   margin-bottom: 20rpx;
   text-align: left;
   font-size: 28rpx;
+  height: 88rpx;
+  box-sizing: border-box;
+  line-height: 88rpx;
 }
 
 .tip {

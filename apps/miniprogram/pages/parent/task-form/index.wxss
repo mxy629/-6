@@ -55,6 +55,11 @@
   width: 100%;
 }
 
+.input.flat {
+  min-height: 88rpx;
+  line-height: 1.4;
+}
+
 .textarea.flat {
   min-height: 140rpx;
 }
@@ -100,6 +105,8 @@
   font-weight: 700;
   color: var(--color-text-primary);
   background: transparent;
+  height: 64rpx;
+  line-height: 64rpx;
 }
 
 .points-unit {

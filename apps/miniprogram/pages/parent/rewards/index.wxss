@@ -17,6 +17,8 @@
   margin-left: 12rpx;
   font-size: 28rpx;
   color: var(--color-text-primary);
+  min-height: 48rpx;
+  line-height: 48rpx;
 }
 
 .status-scroll {
