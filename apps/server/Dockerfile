@@ -15,11 +15,9 @@ ENV DATABASE_URL=file:./dev.db
 RUN npx prisma generate
 RUN npx tsc -p tsconfig.docker.json
 
-# 初始化 SQLite 库（免费容器磁盘为临时盘，重启会重建空库）
-RUN npx prisma db push --skip-generate --accept-data-loss
-
 ENV NODE_ENV=production
 ENV PORT=3000
 EXPOSE 3000
 
-CMD ["node", "dist/main.js"]
+# 启动时初始化 SQLite 库再运行服务（免费容器磁盘为临时盘，重启会重建空库）
+CMD ["sh", "-c", "npx prisma db push --skip-generate --accept-data-loss && node dist/main.js"]
