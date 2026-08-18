@@ -1,5 +1,5 @@
 # 成长星球后端 - 单阶段构建（免费部署优先简单可靠）
-FROM node:20-alpine
+FROM node:20-slim
 
 WORKDIR /app
 
